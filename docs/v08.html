@@ -22,7 +22,7 @@
             //send binary number to function bin2ssd()
             document.getElementById("binary2ssd_input").innerHTML=bin
             var ssd = bin2ssd(bin)
-            document.getElementById("binary2ssd_input").innerHTML=ssd
+            document.getElementById("binary2ssd_output").innerHTML=ssd
             
             //send ssd signals to function illuminate_segments()
             document.getElementById("illuminate_input").innerHTML=ssd
@@ -88,7 +88,7 @@
             while (quotient > 0) {
                 
                 remainder = quotient % 2
-                if (reminder ==1)
+                if (reminder == 1)
                     {output = '1' + output}
                 else
                     {output = '0' + output}
