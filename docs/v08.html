@@ -44,15 +44,15 @@
             //"compute" the value of logical expression for each segment
             //our expression for A was ~wxz + w~x~y + ~x~y~z + ~wy
             var a = !w&x&z || w&!x&!z || w&!x&!z || !x&!y&!z || !w&y
-            var b = false
-            var c = false
-            var d = false
-            var e = false
-            var f = false
-            var g = false
+            var b = !w&&!x&&y || !w&&!x&&!z || !w&&y&&z || !x&&!y || !w&&!y&&!z
+            var c = !w&&z || !x&&!y || !w&&x
+            var d = !w&&x&&!y&&z || !w&&!x&&!z || w&&!x&&!y ||!w&&y&&!z || !w&&!x&&y
+            var e = !w&&y&&!z ||!x&&!y&&!z
+            var f = !w&&!y&&!z || !w&&x&&!z || w&&!x&&!y || !w&&x&&!y
+            var g = !w&&!x&&y || !w&&x&&!y || !w&&x&&!z || w&&!x&&!y
             //assemble and return the output
             //we will build up the the output string element by element
-            var output = ' ' 
+            var output = '' 
             if (a) {output = output + '1'} else {output = output + '0'}
             if (b) {output = output + '1'} else {output = output + '0'}
             if (c) {output = output + '1'} else {output = output + '0'}
@@ -61,16 +61,14 @@
             if (f) {output = output + '1'} else {output = output + '0'}
             if (g) {output = output + '1'} else {output = output + '0'}
             
-            return('1000000') //intial default just illuminates segment A
+            return(output) //intial default just illuminates segment A
         }
         
         function illuminate() {
             
         }
 
-        
-        
-        
+            
         function dec2bin(decimal) {
             
             //substitute a non-algorthmic solution
@@ -81,23 +79,6 @@
             return (binary_numbers[decimal])
         }
         
-        function dec2bin2(decimal) {
-      
-            var quotient = decimal
-            var output = ''
-            while (quotient > 0) {
-                
-                remainder = quotient % 2
-                if (reminder == 1)
-                    {output = '1' + output}
-                else
-                    {output = '0' + output}
-                quotient = Math.floor(quotient/2)
-            }
-            
-            while (output.length < 4) {output = '0' + ouput}
-            return(output)
-        }
         
 
     </script>

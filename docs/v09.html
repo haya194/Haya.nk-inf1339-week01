@@ -24,15 +24,16 @@
             var bin = dec2bin(number)
             document.getElementById("binary_output").innerHTML=bin
             
+            
             //send binary number to function bin2ssd()
             document.getElementById("binary2ssd_input").innerHTML=bin
             var ssd = bin2ssd(bin)
             document.getElementById("binary2ssd_output").innerHTML=ssd
             
             //send ssd signals to function illuminate_segments()
-            document.getElementById("illuminate_input").innerHTML=ssd
+ 
             illuminate(ssd)
-            document.getElementById("illuminate_output").innerHTML='done'
+
         }
         
         function bin2ssd(binary) {
@@ -49,15 +50,15 @@
             //"compute" the value of logical expression for each segment
             //our expression for A was ~wxz + w~x~y + ~x~y~z + ~wy
             var a = !w&x&z || w&!x&!z || w&!x&!z || !x&!y&!z || !w&y
-            var b = false
-            var c = false
-            var d = false
-            var e = false
-            var f = false
-            var g = false
+            var b = !w&&!x&&y || !w&&!x&&!z || !w&&y&&z || !x&&!y || !w&&!y&&!z
+            var c = !w&&z || !x&&!y || !w&&x
+            var d = !w&&x&&!y&&z || !w&&!x&&!z || w&&!x&&!y ||!w&&y&&!z || !w&&!x&&y
+            var e = !w&&y&&!z ||!x&&!y&&!z
+            var f = !w&&!y&&!z || !w&&x&&!z || w&&!x&&!y || !w&&x&&!y
+            var g = !w&&!x&&y || !w&&x&&!y || !w&&x&&!z || w&&!x&&!y
             //assemble and return the output
             //we will build up the the output string element by element
-            var output = ' ' 
+            var output = '' 
             if (a) {output = output + '1'} else {output = output + '0'}
             if (b) {output = output + '1'} else {output = output + '0'}
             if (c) {output = output + '1'} else {output = output + '0'}
@@ -66,11 +67,11 @@
             if (f) {output = output + '1'} else {output = output + '0'}
             if (g) {output = output + '1'} else {output = output + '0'}
             
-            return('1000000') //intial default just illuminates segment A
+            return(output) //intial default just illuminates segment A
         }
         
         function illuminate(signals) {
-            document.getElementById("segments").innerHTML=signals
+            document.getElementById("segments").innerHTML = signals
             if (signals[0] == '1'){
                 document.getElementById("segmentA").innerHTML = 'ON'}
             else {document.getElementById("segmentA").innerHTML = ''}
@@ -99,7 +100,7 @@
             
             //substitute a non-algorthmic solution
             //for short term
-            var binary_numbers= ["0000","0001","0010","0011",
+            binary_numbers= ["0000","0001","0010","0011",
                           "0100","0101","0110","0111",
                           "1000","1001"]
             return (binary_numbers[decimal])
@@ -135,7 +136,7 @@
         
             </td>
             <td class="blackbox"><h3>Illuminate Segments</h3>
-                <p id="segment"></p>
+                <p id="segments"></p>
                 <table>
                     <tr>
                         <td class="notsevenSegmentTable">1</td>

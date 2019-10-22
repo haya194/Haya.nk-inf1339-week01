@@ -33,15 +33,16 @@
             var bin = dec2bin(number)
             document.getElementById("binary_output").innerHTML=bin
             
+            
             //send binary number to function bin2ssd()
             document.getElementById("binary2ssd_input").innerHTML=bin
             var ssd = bin2ssd(bin)
             document.getElementById("binary2ssd_output").innerHTML=ssd
             
             //send ssd signals to function illuminate_segments()
-            document.getElementById("illuminate_input").innerHTML=ssd
+ 
             illuminate(ssd)
-            document.getElementById("illuminate_output").innerHTML='done'
+
         }
         
         function bin2ssd(binary) {
@@ -58,15 +59,15 @@
             //"compute" the value of logical expression for each segment
             //our expression for A was ~wxz + w~x~y + ~x~y~z + ~wy
             var a = !w&x&z || w&!x&!z || w&!x&!z || !x&!y&!z || !w&y
-            var b = false
-            var c = false
-            var d = false
-            var e = false
-            var f = false
-            var g = false
+            var b = !w&&!x&&y || !w&&!x&&!z || !w&&y&&z || !x&&!y || !w&&!y&&!z
+            var c = !w&&z || !x&&!y || !w&&x
+            var d = !w&&x&&!y&&z || !w&&!x&&!z || w&&!x&&!y ||!w&&y&&!z || !w&&!x&&y
+            var e = !w&&y&&!z ||!x&&!y&&!z
+            var f = !w&&!y&&!z || !w&&x&&!z || w&&!x&&!y || !w&&x&&!y
+            var g = !w&&!x&&y || !w&&x&&!y || !w&&x&&!z || w&&!x&&!y
             //assemble and return the output
             //we will build up the the output string element by element
-            var output = ' ' 
+            var output = '' 
             if (a) {output = output + '1'} else {output = output + '0'}
             if (b) {output = output + '1'} else {output = output + '0'}
             if (c) {output = output + '1'} else {output = output + '0'}
@@ -75,46 +76,45 @@
             if (f) {output = output + '1'} else {output = output + '0'}
             if (g) {output = output + '1'} else {output = output + '0'}
             
-            return('1000000') //intial default just illuminates segment A
-        }
-        
+            return(output) //intial default just illuminates segment A
+        }    
         function illuminate(signals) {
-            document.getElementById("segments").innerHTML=signals
-            if (signals[0] == '1'){
-                document.getElementById("segmentA").innerHTML = 'ON'}
-                document.getElementById("segmentA").setAttribute = ("class","red")}
+            document.getElementById("segments").innerHTML= signals
+            if (signals[0] == '1') {
+                document.getElementById("segmentA").innerHTML = 'ON'
+                document.getElementById("segmentA").setAttribute ("class","red")}
             else {document.getElementById("segmentA").innerHTML = ''
-                 document.getElementById("segmentA").setAttribute = ("class","black")}}
-            if (signals[1] == '1'){
+                 document.getElementById("segmentA").setAttribute ("class","black")}
+            if (signals[1] == '1') {
                 document.getElementById("segmentB").innerHTML = 'ON'
-                document.getElementById("segmentB").setAttribute = ("class","red")}
+                document.getElementById("segmentB").setAttribute ("class","red")}
             else {document.getElementById("segmentB").innerHTML = ''
-                 document.getElementById("segmentB").setAttribute = ("class","black")}}
-            if (signals[2] == '1'){
+                 document.getElementById("segmentB").setAttribute ("class","black")}
+            if (signals[2] == '1') {
                 document.getElementById("segmentC").innerHTML = 'ON'
-                document.getElementById("segmentC").setAttribute = ("class","red")}}
+                document.getElementById("segmentC").setAttribute ("class","red")}
             else {document.getElementById("segmentC").innerHTML = ''
-                 document.getElementById("segmentC").setAttribute = ("class","black")}}
-            if (signals[3] == '1'){
+                 document.getElementById("segmentC").setAttribute ("class","black")}
+            if (signals[3] == '1') {
                 document.getElementById("segmentD").innerHTML = 'ON'
-                document.getElementById("segmentD").setAttribute = ("class","red")}}
+                document.getElementById("segmentD").setAttribute ("class","red")}
             else {document.getElementById("segmentD").innerHTML = ''
-                 document.getElementById("segmentD").setAttribute = ("class","black")}}
-            if (signals[4] == '1'){
+                 document.getElementById("segmentD").setAttribute ("class","black")}
+            if (signals[4] == '1') {
                 document.getElementById("segmentE").innerHTML = 'ON'
-                document.getElementById("segmentE").setAttribute = ("class","red")}}
+                document.getElementById("segmentE").setAttribute ("class","red")}
             else {document.getElementById("segmentE").innerHTML = ''
-                 document.getElementById("segmentE").setAttribute = ("class","black")}}
-            if (signals[5] == '1'){
+                 document.getElementById("segmentE").setAttribute ("class","black")}
+            if (signals[5] == '1') {
                 document.getElementById("segmentF").innerHTML = 'ON'
-                document.getElementById("segmentF").setAttribute = ("class","red")}}
+                document.getElementById("segmentF").setAttribute ("class","red")}
             else {document.getElementById("segmentF").innerHTML = ''
-                 document.getElementById("segmentF").setAttribute = ("class","black")}}
-            if (signals[6] == '1'){
+                 document.getElementById("segmentF").setAttribute ("class","black")}
+            if (signals[6] == '1') {
                 document.getElementById("segmentG").innerHTML = 'ON'
-                document.getElementById("segmentG").setAttribute = ("class","red")}}
+                document.getElementById("segmentG").setAttribute ("class","red")}
             else {document.getElementById("segmentG").innerHTML = ''
-                 document.getElementById("segmentG").setAttribute = ("class","black")}}
+                 document.getElementById("segmentG").setAttribute ("class","black")}
          }
 
         
@@ -158,39 +158,39 @@
         
             </td>
             <td class="blackbox"><h3>Illuminate Segments</h3>
-                <p id="segment"></p>
+                <p id="segments"></p>
                 <table>
                     <tr>
-                        <td class="notsevenSegmentTable corner">1</td>
+                        <td class="notsevenSegmentTable">1</td>
                         <td id="segmentA"
                             class="sevenSegmentTable horizaontal">A</td>
-                        <td class="notsevenSegmentTable corner">3</td>
+                        <td class="notsevenSegmentTable">3</td>
                     </tr> 
                       <tr>
                         <td id="segmentF"
                             class="sevenSegmentTable vertical">F</td>
-                        <td class="notsevenSegmentTable middle">2</td>
+                        <td class="notsevenSegmentTable">2</td>
                         <td id="segmentB"
                             class="sevenSegmentTable vertical">B</td>
                     </tr> 
                       <tr>
-                        <td class="notsevenSegmentTable corner">1</td>
+                        <td class="notsevenSegmentTable">1</td>
                         <td id="segmentG"
                             class="sevenSegmentTable horizontal">G</td>
-                        <td class="notsevenSegmentTable corner">3</td>
+                        <td class="notsevenSegmentTable">3</td>
                     </tr> 
                       <tr>
                         <td id="segmentE"
                             class="sevenSegmentTable vertical">E</td>
-                        <td class="notsevenSegmentTable middle">2</td>
+                        <td class="notsevenSegmentTable">2</td>
                         <td id="segmentC"
                             class="sevenSegmentTable vertical">C</td>
                     </tr> 
                      <tr>
-                        <td class="notsevenSegmentTable corner">1</td>
+                        <td class="notsevenSegmentTable">1</td>
                         <td id="segmentD"
                             class="sevenSegmentTable horizontal">D</td>
-                        <td class="notsevenSegmentTable corner">3</td>
+                        <td class="notsevenSegmentTable">3</td>
                     </tr> 
                 </table>
             </td>
